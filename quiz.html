@@ -1,0 +1,864 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz — Freimaurerei Seminar</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <a href="index.html" class="logo">
+          <svg class="logo-symbol" viewBox="0 0 100 100" fill="none">
+            <line
+              x1="50"
+              y1="12"
+              x2="18"
+              y2="78"
+              stroke="#c9a227"
+              stroke-width="6"
+              stroke-linecap="round"
+            />
+            <line
+              x1="50"
+              y1="12"
+              x2="82"
+              y2="78"
+              stroke="#c9a227"
+              stroke-width="6"
+              stroke-linecap="round"
+            />
+            <path
+              d="M22 58 L22 82 L78 82"
+              stroke="#c9a227"
+              stroke-width="6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              fill="none"
+            />
+            <text
+              x="50"
+              y="72"
+              text-anchor="middle"
+              fill="#c9a227"
+              font-family="serif"
+              font-size="24"
+              font-weight="bold"
+            >
+              G
+            </text>
+          </svg>
+          <div class="logo-text">F∴ M∴ Seminar<span>Symbolkunde</span></div>
+        </a>
+        <nav>
+          <a href="index.html"
+            ><span class="lang-de">Start</span><span class="lang-en">Home</span
+            ><span class="lang-pt">Início</span></a
+          >
+          <a href="schurz.html"
+            ><span class="lang-de">Schurz</span
+            ><span class="lang-en">Apron</span
+            ><span class="lang-pt">Avental</span></a
+          >
+          <a href="bijou.html"
+            ><span class="lang-de">Bijou</span><span class="lang-en">Jewel</span
+            ><span class="lang-pt">Joia</span></a
+          >
+          <a href="handschuhe.html"
+            ><span class="lang-de">Handschuhe</span
+            ><span class="lang-en">Gloves</span
+            ><span class="lang-pt">Luvas</span></a
+          >
+          <a href="quiz.html" class="active">Quiz</a>
+        </nav>
+        <div class="lang-toggle">
+          <button
+            class="lang-btn"
+            data-lang="de"
+            onclick="changeLanguage('de')"
+          >
+            DE
+          </button>
+          <button
+            class="lang-btn"
+            data-lang="en"
+            onclick="changeLanguage('en')"
+          >
+            EN
+          </button>
+          <button
+            class="lang-btn"
+            data-lang="pt"
+            onclick="changeLanguage('pt')"
+          >
+            PT
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero" style="padding-bottom: 1rem">
+        <h1>Quiz</h1>
+        <p class="subtitle">
+          <span class="lang-de">Schurz, Bijou und Handschuhe</span>
+          <span class="lang-en">Apron, Jewel and Gloves</span>
+          <span class="lang-pt">Avental, Joia e Luvas</span>
+        </p>
+      </section>
+
+      <div class="quiz-wrapper">
+        <!-- START SCREEN -->
+        <div id="screen-start">
+          <div class="quiz-start">
+            <span style="font-size: 3rem; display: block; margin-bottom: 1rem"
+              >❓</span
+            >
+            <h2>
+              <span class="lang-de">Teste dein Wissen</span>
+              <span class="lang-en">Test Your Knowledge</span>
+              <span class="lang-pt">Teste seu Conhecimento</span>
+            </h2>
+            <p>
+              <span class="lang-de"
+                >10 Fragen über Schurz, Bijou und Handschuhe.<br />Am Ende
+                siehst du dein Ergebnis mit Erklärungen zu jeder Frage.</span
+              >
+              <span class="lang-en"
+                >10 questions about the Apron, Jewel and Gloves.<br />At the end
+                you'll see your results with explanations for every
+                question.</span
+              >
+              <span class="lang-pt"
+                >10 perguntas sobre o Avental, Joia e Luvas.<br />No final você
+                verá seus resultados com explicações para cada pergunta.</span
+              >
+            </p>
+            <button class="btn btn-primary" onclick="startQuiz()">
+              <span class="lang-de">Quiz starten →</span>
+              <span class="lang-en">Start Quiz →</span>
+              <span class="lang-pt">Iniciar Quiz →</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- QUESTION SCREEN -->
+        <div id="screen-question" style="display: none">
+          <div class="progress-bar-wrapper">
+            <div
+              class="progress-bar-fill"
+              id="progress-bar"
+              style="width: 0%"
+            ></div>
+          </div>
+          <div class="progress-label" id="progress-label">Frage 1 von 10</div>
+
+          <div class="question-card">
+            <p class="question-number" id="question-number">Frage 1</p>
+            <p class="question-text" id="question-text"></p>
+            <div class="options-grid" id="options-grid"></div>
+          </div>
+
+          <div class="quiz-nav">
+            <button
+              class="btn btn-primary"
+              id="btn-next"
+              onclick="handleNext()"
+              disabled
+            >
+              <span id="btn-next-label">Weiter →</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- RESULTS SCREEN -->
+        <div id="screen-results" style="display: none">
+          <div class="quiz-start" style="padding-bottom: 1rem">
+            <span style="font-size: 3rem; display: block" id="result-emoji"
+              >🏆</span
+            >
+            <h2>
+              <span class="lang-de">Dein Ergebnis</span>
+              <span class="lang-en">Your Result</span>
+              <span class="lang-pt">Seu Resultado</span>
+            </h2>
+            <div class="score-display">
+              <span id="score-num">0</span><span>/10</span>
+            </div>
+            <p
+              id="score-msg"
+              style="color: var(--text-dim); font-size: 1.05rem"
+            ></p>
+          </div>
+
+          <div class="divider" style="max-width: 300px; margin: 0 auto 2rem">
+            <span class="divider-symbol">◆</span>
+          </div>
+
+          <p
+            style="
+              font-family: 'Cinzel', serif;
+              font-size: 0.75rem;
+              letter-spacing: 0.1em;
+              color: var(--text-muted);
+              text-transform: uppercase;
+              margin-bottom: 1rem;
+            "
+            id="review-title"
+          >
+            Detaillierte Auswertung
+          </p>
+
+          <div id="results-list"></div>
+
+          <div
+            style="
+              display: flex;
+              gap: 1rem;
+              flex-wrap: wrap;
+              justify-content: center;
+              margin-top: 2rem;
+            "
+          >
+            <button class="btn btn-primary" onclick="restartQuiz()">
+              <span class="lang-de">Nochmal versuchen</span>
+              <span class="lang-en">Try Again</span>
+              <span class="lang-pt">Tentar novamente</span>
+            </button>
+            <a href="index.html" class="btn btn-ghost">
+              <span class="lang-de">Zur Übersicht</span>
+              <span class="lang-en">Back to Overview</span>
+              <span class="lang-pt">Voltar à Visão Geral</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <span class="footer-symbol">∴</span>
+      <p>
+        <span class="lang-de"
+          >F∴ M∴ Seminar · Schurz, Bijou und Handschuhe · Symbolkunde für neue
+          Brüder</span
+        ><span class="lang-en"
+          >F∴ M∴ Seminar · Apron, Jewel and Gloves · Symbolism for New
+          Brothers</span
+        ><span class="lang-pt"
+          >F∴ M∴ Seminário · Avental, Joia e Luvas · Simbolismo para Novos
+          Irmãos</span
+        >
+      </p>
+    </footer>
+
+    <script>
+      // ── Language ──────────────────────────────────────────────────────────────────
+      let lang = localStorage.getItem('lang') || 'de';
+
+      function setLanguage(l) {
+        lang = l;
+        localStorage.setItem('lang', l);
+        document.documentElement.lang = l;
+        document.querySelectorAll('.lang-btn').forEach((btn) => {
+          btn.classList.toggle('active', btn.dataset.lang === l);
+        });
+      }
+
+      function changeLanguage(l) {
+        setLanguage(l);
+        if (quizState === 'question') renderQuestion();
+        if (quizState === 'results') renderResults();
+        updateStaticLabels();
+      }
+
+      function updateStaticLabels() {
+        if (quizState === 'question') {
+          const labelQ =
+            lang === 'de' ? 'Frage' : lang === 'pt' ? 'Pergunta' : 'Question';
+          const labelOf = lang === 'de' ? 'von' : lang === 'pt' ? 'de' : 'of';
+          document.getElementById('progress-label').textContent =
+            `${labelQ} ${currentIdx + 1} ${labelOf} ${QUESTIONS.length}`;
+          document.getElementById('question-number').textContent =
+            `${labelQ} ${currentIdx + 1}`;
+          updateNextBtn();
+        }
+        if (quizState === 'results') {
+          document.getElementById('review-title').textContent =
+            lang === 'de'
+              ? 'Detaillierte Auswertung'
+              : lang === 'pt'
+                ? 'Revisão Detalhada'
+                : 'Detailed Review';
+        }
+      }
+
+      // ── Quiz Data ─────────────────────────────────────────────────────────────────
+      const QUESTIONS = [
+        {
+          de: {
+            q: 'Was symbolisiert der weiße Freimaurer-Schurz?',
+            opts: [
+              'Reichtum und soziales Ansehen',
+              'Reinheit und Unschuld',
+              'Stärke und Macht',
+              'Treue zum Logenmeister',
+            ],
+            expl: 'Der weiße Schurz steht für Reinheit und Unschuld. Er ist das erste symbolische Geschenk eines Freimaurers und erinnert ihn daran, sein Leben nach den höchsten moralischen Grundsätzen zu führen.',
+          },
+          en: {
+            q: 'What does the white Masonic apron symbolize?',
+            opts: [
+              'Wealth and social status',
+              'Purity and innocence',
+              'Strength and power',
+              'Loyalty to the Worshipful Master',
+            ],
+            expl: 'The white apron represents purity and innocence. It is the first symbolic gift a Freemason receives and reminds him to lead his life according to the highest moral principles.',
+          },
+          pt: {
+            q: 'O que simboliza o avental branco maçônico?',
+            opts: [
+              'Riqueza e prestígio social',
+              'Pureza e inocência',
+              'Força e poder',
+              'Lealdade ao Venerável Mestre',
+            ],
+            expl: 'O avental branco representa pureza e inocência. É o primeiro presente simbólico que um Maçom recebe e o lembra de conduzir sua vida segundo os mais elevados princípios morais.',
+          },
+          correct: 1,
+        },
+        {
+          de: {
+            q: 'Aus welchem Material besteht der traditionelle Lehrlingsschurz?',
+            opts: [
+              'Weißer Seide',
+              'Weißem Leinen',
+              'Weißem Leder (Lammfell)',
+              'Weißem Baumwollstoff',
+            ],
+            expl: 'Der Lehrlingsschurz wird traditionell aus weißem Lammfell gefertigt. Das Lammfell trägt die biblische Symbolik von Unschuld und Opferbereitschaft.',
+          },
+          en: {
+            q: 'From what material is the traditional Apprentice apron made?',
+            opts: [
+              'White silk',
+              'White linen',
+              'White leather (lambskin)',
+              'White cotton',
+            ],
+            expl: 'The Apprentice apron is traditionally made from white lambskin, carrying the biblical symbolism of innocence and sacrifice.',
+          },
+          pt: {
+            q: 'De qual material é feito o tradicional avental de Aprendiz?',
+            opts: [
+              'Seda branca',
+              'Linho branco',
+              'Couro branco (pele de cordeiro)',
+              'Algodão branco',
+            ],
+            expl: 'O avental de Aprendiz é feito tradicionalmente de pele de cordeiro branca, carregando o simbolismo bíblico de inocência e sacrifício.',
+          },
+          correct: 2,
+        },
+        {
+          de: {
+            q: `Was ist ein „Bijou" in der Freimaurerei?`,
+            opts: [
+              'Ein geheimes Passwort',
+              'Ein Logenabzeichen oder Amtszeichen',
+              'Ein freimaurerisches Ritual',
+              'Eine Auszeichnung für Verdienste',
+            ],
+            expl: 'Bijou (frz. für Kleinod) bezeichnet ein Abzeichen — entweder als Logenabzeichen oder als Amtszeichen für bestimmte Positionen in der Loge.',
+          },
+          en: {
+            q: 'What is a "Jewel" (Bijou) in Freemasonry?',
+            opts: [
+              'A secret password',
+              "A lodge badge or officer's insignia",
+              'A Masonic ritual',
+              'An award for distinguished service',
+            ],
+            expl: "A jewel in Freemasonry is a badge — either a lodge membership badge or an officer's insignia identifying the wearer's specific role.",
+          },
+          pt: {
+            q: "O que é uma 'Joia' (Bijou) na Maçonaria?",
+            opts: [
+              'Uma senha secreta',
+              'Um distintivo de loja ou insígnia de oficial',
+              'Um ritual maçônico',
+              'Um prêmio por serviço distinto',
+            ],
+            expl: 'Uma joia na Maçonaria é um distintivo — seja um distintivo de filiação à loja ou uma insígnia de oficial que identifica o papel específico do portador.',
+          },
+          correct: 1,
+        },
+        {
+          de: {
+            q: 'Welches Bijou trägt der Vorsitzende Meister der Loge?',
+            opts: ['Die Waage', 'Das Senkblei', 'Das Winkelmaß', 'Den Zirkel'],
+            expl: 'Der Vorsitzende Meister trägt das Winkelmaß. Es prüft ob Winkel korrekt sind — symbolisch steht es für Gerechtigkeit und moralische Aufrichtigkeit in der Führung der Loge.',
+          },
+          en: {
+            q: 'Which jewel does the Worshipful Master of the lodge wear?',
+            opts: ['The level', 'The plumb', 'The square', 'The compass'],
+            expl: 'The Worshipful Master wears the Square. It checks that angles are true — symbolically representing justice and moral uprightness in guiding the lodge.',
+          },
+          pt: {
+            q: 'Qual joia usa o Venerável Mestre da loja?',
+            opts: ['O nível', 'O prumo', 'O esquadro', 'O compasso'],
+            expl: 'O Venerável Mestre usa o Esquadro. Ele verifica se os ângulos estão corretos — simbolicamente representando justiça e retidão moral na condução da loja.',
+          },
+          correct: 2,
+        },
+        {
+          de: {
+            q: 'Welches Bijou trägt der Erste Aufseher?',
+            opts: ['Das Winkelmaß', 'Die Waage', 'Das Senkblei', 'Den Hammer'],
+            expl: 'Der Erste Aufseher trägt die Waage. Sie steht für Gleichheit — alle Freimaurer begegnen sich auf gleicher Ebene, unabhängig von weltlichem Rang und Ansehen.',
+          },
+          en: {
+            q: 'Which jewel does the Senior Warden wear?',
+            opts: ['The square', 'The level', 'The plumb', 'The mallet'],
+            expl: 'The Senior Warden wears the Level. It represents equality — all Freemasons meet on the same plane, regardless of worldly rank or status.',
+          },
+          pt: {
+            q: 'Qual joia usa o Primeiro Vigilante?',
+            opts: ['O esquadro', 'O nível', 'O prumo', 'O maço'],
+            expl: 'O Primeiro Vigilante usa o Nível. Representa igualdade — todos os Maçons se encontram no mesmo plano, independentemente de rank ou status mundano.',
+          },
+          correct: 1,
+        },
+        {
+          de: {
+            q: 'Wann erhält ein neuer Freimaurer seine weißen Handschuhe?',
+            opts: [
+              'Nach einem Jahr Mitgliedschaft',
+              'Bei Erreichen des Gesellengrades',
+              'Bei seiner Aufnahme (Initiation)',
+              'Nach Abschluss der Lehrzeit',
+            ],
+            expl: 'Die weißen Handschuhe werden dem neuen Freimaurer feierlich bei seiner Aufnahme überreicht. Sie sind eines der ersten Symbole, die er als Freimaurer empfängt.',
+          },
+          en: {
+            q: 'When does a new Freemason receive his white gloves?',
+            opts: [
+              'After one year of membership',
+              'Upon reaching the Fellow Craft degree',
+              'At his initiation',
+              'After completing his apprenticeship',
+            ],
+            expl: 'White gloves are solemnly presented at initiation. They are among the first symbols a new Freemason receives.',
+          },
+          pt: {
+            q: 'Quando um novo Maçom recebe suas luvas brancas?',
+            opts: [
+              'Após um ano de filiação',
+              'Ao atingir o grau de Companheiro',
+              'Em sua iniciação',
+              'Após concluir o aprendizado',
+            ],
+            expl: 'As luvas brancas são solenemente entregues na iniciação. Estão entre os primeiros símbolos que um novo Maçom recebe.',
+          },
+          correct: 2,
+        },
+        {
+          de: {
+            q: 'Für wen ist das zweite Paar Handschuhe bestimmt, das ein neuer Freimaurer bei seiner Aufnahme erhält?',
+            opts: [
+              'Für seinen Logenmeister',
+              'Für seinen Vater',
+              'Für die Frau, die seinem Herzen am nächsten steht',
+              'Er behält beide Paare selbst',
+            ],
+            expl: `Das zweite Paar ist für die „Gefährtin seines Lebens" — die Frau, die seinem Herzen am nächsten steht. Diese Geste zeigt, dass freimaurerische Werte über die Logenmauern hinaus in das Leben des Bruders wirken sollen.`,
+          },
+          en: {
+            q: 'For whom is the second pair of gloves at initiation intended?',
+            opts: [
+              'For his Worshipful Master',
+              'For his father',
+              'For the woman closest to his heart',
+              'He keeps both pairs himself',
+            ],
+            expl: "The second pair is for 'the companion of his life' — the woman closest to his heart. This gesture shows that Masonic values should extend beyond the lodge into the brother's daily life.",
+          },
+          pt: {
+            q: 'Para quem se destina o segundo par de luvas na iniciação?',
+            opts: [
+              'Para o seu Venerável Mestre',
+              'Para o seu pai',
+              'Para a mulher mais próxima ao seu coração',
+              'Ele fica com os dois pares',
+            ],
+            expl: "O segundo par é para 'a companheira de sua vida' — a mulher mais próxima ao seu coração. Este gesto mostra que os valores maçônicos devem se estender além da loja para a vida diária do irmão.",
+          },
+          correct: 2,
+        },
+        {
+          de: {
+            q: 'Wie werden die ersten drei Grade der Freimaurerei (Johannismaurerei) bezeichnet?',
+            opts: [
+              'Rote Maurerei',
+              'Goldene Maurerei',
+              'Schwarze Maurerei',
+              'Blaue Maurerei',
+            ],
+            expl: `Die ersten drei Grade — Lehrling, Geselle und Meister — werden als „Blaue Maurerei" bezeichnet. Blau ist die Farbe der Treue, Freundschaft und des Universums in der freimaurerischen Symbolik.`,
+          },
+          en: {
+            q: "What are the first three degrees of Freemasonry (St. John's Masonry) called?",
+            opts: [
+              'Red Masonry',
+              'Golden Masonry',
+              'Black Masonry',
+              'Blue Lodge Masonry',
+            ],
+            expl: "The first three degrees — Entered Apprentice, Fellow Craft, and Master Mason — form the 'Blue Lodge.' Blue is the color of loyalty, friendship, and the universe in Masonic symbolism.",
+          },
+          pt: {
+            q: 'Como são chamados os primeiros três graus da Maçonaria (Maçonaria de São João)?',
+            opts: [
+              'Maçonaria Vermelha',
+              'Maçonaria Dourada',
+              'Maçonaria Negra',
+              'Maçonaria Azul',
+            ],
+            expl: "Os primeiros três graus — Aprendiz Iniciado, Companheiro e Mestre Maçom — formam a 'Loja Azul'. Azul é a cor da lealdade, amizade e do universo no simbolismo maçônico.",
+          },
+          correct: 3,
+        },
+        {
+          de: {
+            q: 'Welches Bijou trägt der Zweite Aufseher?',
+            opts: [
+              'Die Waage',
+              'Das Senkblei',
+              'Das Winkelmaß',
+              'Die Schaufel',
+            ],
+            expl: 'Der Zweite Aufseher trägt das Senkblei. Es prüft die senkrechte Ausrichtung und symbolisiert, dass ein Freimaurer in seinem Verhalten aufrecht und gerade sein soll.',
+          },
+          en: {
+            q: 'Which jewel does the Junior Warden wear?',
+            opts: ['The level', 'The plumb', 'The square', 'The shovel'],
+            expl: 'The Junior Warden wears the Plumb. It checks vertical alignment, symbolizing that a Freemason should be upright and straight in all his conduct.',
+          },
+          pt: {
+            q: 'Qual joia usa o Segundo Vigilante?',
+            opts: ['O nível', 'O prumo', 'O esquadro', 'A pá'],
+            expl: 'O Segundo Vigilante usa o Prumo. Ele verifica o alinhamento vertical, simbolizando que um Maçom deve ser reto e íntegro em toda a sua conduta.',
+          },
+          correct: 1,
+        },
+        {
+          de: {
+            q: `Was symbolisiert der „raue Stein" in der freimaurerischen Symbolik?`,
+            opts: [
+              'Das Fundament des Logengebäudes',
+              'Den Freimaurer, der noch an sich selbst arbeiten muss',
+              'Ein Werkzeug für rituelle Zeremonien',
+              'Ein Symbol ausschließlich des dritten Grades',
+            ],
+            expl: `Der „raue Stein" symbolisiert den Freimaurer in seinem natürlichen Zustand — mit all seinen Unvollkommenheiten. Die freimaurerische Arbeit besteht darin, diesen Stein zu glätten, also an sich selbst zu arbeiten.`,
+          },
+          en: {
+            q: 'What does the "rough ashlar" (rough stone) represent in Masonic symbolism?',
+            opts: [
+              'The foundation of the lodge building',
+              'The Freemason who still needs to work on himself',
+              'A tool for ritual ceremonies',
+              'A symbol exclusively of the third degree',
+            ],
+            expl: "The 'rough ashlar' symbolizes the Freemason in his natural state with all his imperfections. Masonic work consists of smoothing this stone — that is, working on oneself.",
+          },
+          pt: {
+            q: "O que representa a 'pedra bruta' no simbolismo maçônico?",
+            opts: [
+              'A fundação do edifício da loja',
+              'O Maçom que ainda precisa trabalhar sobre si mesmo',
+              'Uma ferramenta para cerimônias rituais',
+              'Um símbolo exclusivo do terceiro grau',
+            ],
+            expl: "A 'pedra bruta' simboliza o Maçom em seu estado natural com todas as suas imperfeições. O trabalho maçônico consiste em polir essa pedra — ou seja, trabalhar sobre si mesmo.",
+          },
+          correct: 1,
+        },
+      ];
+
+      // ── State ─────────────────────────────────────────────────────────────────────
+      let quizState = 'start'; // 'start' | 'question' | 'answered' | 'results'
+      let currentIdx = 0;
+      let userAnswers = new Array(QUESTIONS.length).fill(null);
+      let answered = false; // whether current question has been answered
+
+      // ── Quiz Control ──────────────────────────────────────────────────────────────
+      function startQuiz() {
+        currentIdx = 0;
+        userAnswers = new Array(QUESTIONS.length).fill(null);
+        answered = false;
+        quizState = 'question';
+
+        document.getElementById('screen-start').style.display = 'none';
+        document.getElementById('screen-results').style.display = 'none';
+        document.getElementById('screen-question').style.display = 'block';
+
+        renderQuestion();
+      }
+
+      function renderQuestion() {
+        const q = QUESTIONS[currentIdx];
+        const d = q[lang];
+        const LETTERS = ['A', 'B', 'C', 'D'];
+
+        // Progress bar
+        const pct = (currentIdx / QUESTIONS.length) * 100;
+        document.getElementById('progress-bar').style.width = pct + '%';
+        const labelQ =
+          lang === 'de' ? 'Frage' : lang === 'pt' ? 'Pergunta' : 'Question';
+        const labelOf = lang === 'de' ? 'von' : lang === 'pt' ? 'de' : 'of';
+        document.getElementById('progress-label').textContent =
+          `${labelQ} ${currentIdx + 1} ${labelOf} ${QUESTIONS.length}`;
+        document.getElementById('question-number').textContent =
+          `${labelQ} ${currentIdx + 1}`;
+
+        document.getElementById('question-text').textContent = d.q;
+
+        // Options
+        const grid = document.getElementById('options-grid');
+        grid.innerHTML = '';
+
+        d.opts.forEach((opt, i) => {
+          const btn = document.createElement('button');
+          btn.className = 'option-btn';
+          btn.dataset.i = i;
+
+          if (answered || userAnswers[currentIdx] !== null) {
+            const committed = userAnswers[currentIdx];
+            btn.disabled = true;
+            if (i === q.correct) {
+              btn.classList.add(
+                committed === q.correct && committed === i
+                  ? 'correct'
+                  : 'reveal-correct',
+              );
+            }
+            if (i === committed && i !== q.correct) {
+              btn.classList.add('incorrect');
+            }
+            if (i === committed && i === q.correct) {
+              btn.classList.add('correct');
+            }
+          }
+
+          btn.innerHTML = `<span class="option-letter">${LETTERS[i]}</span><span>${opt}</span>`;
+          if (!answered && userAnswers[currentIdx] === null) {
+            btn.addEventListener('click', () => selectOption(i));
+          }
+          grid.appendChild(btn);
+        });
+
+        answered = userAnswers[currentIdx] !== null;
+        updateNextBtn();
+      }
+
+      function selectOption(i) {
+        if (answered) return;
+
+        // Visual: highlight selected, clear others
+        document.querySelectorAll('.option-btn').forEach((btn) => {
+          btn.classList.toggle('selected', parseInt(btn.dataset.i) === i);
+        });
+
+        // Commit answer
+        userAnswers[currentIdx] = i;
+        answered = true;
+
+        // Show correct/incorrect on buttons
+        const q = QUESTIONS[currentIdx];
+        document.querySelectorAll('.option-btn').forEach((btn) => {
+          const idx = parseInt(btn.dataset.i);
+          btn.disabled = true;
+          btn.classList.remove('selected');
+          if (idx === q.correct) {
+            btn.classList.add(idx === i ? 'correct' : 'reveal-correct');
+          }
+          if (idx === i && idx !== q.correct) {
+            btn.classList.add('incorrect');
+          }
+          if (idx === i && idx === q.correct) {
+            btn.classList.add('correct');
+          }
+        });
+
+        updateNextBtn();
+      }
+
+      function updateNextBtn() {
+        const btn = document.getElementById('btn-next');
+        const isLast = currentIdx === QUESTIONS.length - 1;
+
+        if (!answered && userAnswers[currentIdx] === null) {
+          btn.disabled = true;
+          document.getElementById('btn-next-label').textContent =
+            lang === 'de' ? 'Weiter →' : lang === 'pt' ? 'Próximo →' : 'Next →';
+          return;
+        }
+
+        btn.disabled = false;
+        if (isLast) {
+          document.getElementById('btn-next-label').textContent =
+            lang === 'de'
+              ? 'Ergebnis anzeigen ✓'
+              : lang === 'pt'
+                ? 'Ver Resultados ✓'
+                : 'Show Results ✓';
+        } else {
+          document.getElementById('btn-next-label').textContent =
+            lang === 'de' ? 'Weiter →' : lang === 'pt' ? 'Próximo →' : 'Next →';
+        }
+      }
+
+      function handleNext() {
+        if (!answered && userAnswers[currentIdx] === null) return;
+
+        if (currentIdx < QUESTIONS.length - 1) {
+          currentIdx++;
+          answered = userAnswers[currentIdx] !== null;
+          renderQuestion();
+        } else {
+          showResults();
+        }
+      }
+
+      // ── Results ───────────────────────────────────────────────────────────────────
+      function showResults() {
+        quizState = 'results';
+        const score = userAnswers.filter(
+          (a, i) => a === QUESTIONS[i].correct,
+        ).length;
+
+        document.getElementById('screen-question').style.display = 'none';
+        document.getElementById('screen-results').style.display = 'block';
+        document.getElementById('score-num').textContent = score;
+
+        const emoji = document.getElementById('result-emoji');
+        const msg = document.getElementById('score-msg');
+
+        if (score === 10) {
+          emoji.textContent = '🏆';
+          msg.textContent =
+            lang === 'de'
+              ? 'Perfekt! Du kennst die Symbole der Freimaurerei ausgezeichnet!'
+              : lang === 'pt'
+                ? 'Perfeito! Você conhece os símbolos da Maçonaria de forma excelente!'
+                : 'Perfect! You know the symbols of Freemasonry excellently!';
+        } else if (score >= 7) {
+          emoji.textContent = '⭐';
+          msg.textContent =
+            lang === 'de'
+              ? 'Sehr gut! Du hast die wichtigsten Symbole gut verstanden.'
+              : lang === 'pt'
+                ? 'Muito bem! Você compreendeu bem os símbolos mais importantes.'
+                : 'Very good! You have understood the most important symbols well.';
+        } else if (score >= 5) {
+          emoji.textContent = '📚';
+          msg.textContent =
+            lang === 'de'
+              ? 'Gut! Schau dir die Seminarseiten nochmals an, um dein Wissen zu vertiefen.'
+              : lang === 'pt'
+                ? 'Bom! Revise as páginas do seminário mais uma vez para aprofundar seu conhecimento.'
+                : 'Good! Review the seminar pages once more to deepen your knowledge.';
+        } else {
+          emoji.textContent = '🔍';
+          msg.textContent =
+            lang === 'de'
+              ? 'Die Freimaurerei ist reich an Symbolen. Lies die Seminarseiten nochmals durch!'
+              : lang === 'pt'
+                ? 'A Maçonaria é rica em símbolos. Leia novamente as páginas do seminário!'
+                : 'Freemasonry is rich in symbols. Read the seminar pages again!';
+        }
+
+        document.getElementById('progress-bar').style.width = '100%';
+        renderResults();
+      }
+
+      function renderResults() {
+        const LETTERS = ['A', 'B', 'C', 'D'];
+        const list = document.getElementById('results-list');
+        list.innerHTML = '';
+        document.getElementById('review-title').textContent =
+          lang === 'de'
+            ? 'Detaillierte Auswertung'
+            : lang === 'pt'
+              ? 'Revisão Detalhada'
+              : 'Detailed Review';
+
+        QUESTIONS.forEach((q, i) => {
+          const d = q[lang];
+          const chosen = userAnswers[i];
+          const isCorrect = chosen === q.correct;
+
+          const item = document.createElement('div');
+          item.className = `result-item ${isCorrect ? 'result-correct' : 'result-incorrect'}`;
+
+          const labelText = isCorrect
+            ? lang === 'de'
+              ? `✓ Frage ${i + 1} — Richtig`
+              : lang === 'pt'
+                ? `✓ Pergunta ${i + 1} — Correta`
+                : `✓ Question ${i + 1} — Correct`
+            : lang === 'de'
+              ? `✗ Frage ${i + 1} — Falsch`
+              : lang === 'pt'
+                ? `✗ Pergunta ${i + 1} — Incorreta`
+                : `✗ Question ${i + 1} — Incorrect`;
+
+          let answersHTML = '';
+          if (!isCorrect && chosen !== null) {
+            answersHTML += `
+              <div class="your-answer">
+                <strong>${lang === 'de' ? 'Deine Antwort:' : lang === 'pt' ? 'Sua resposta:' : 'Your answer:'}</strong>&nbsp;
+                ${LETTERS[chosen]}. ${d.opts[chosen]}
+              </div>`;
+          }
+          answersHTML += `
+            <div class="${isCorrect ? 'your-answer was-correct' : 'correct-answer'}">
+              <strong>${lang === 'de' ? 'Richtige Antwort:' : lang === 'pt' ? 'Resposta correta:' : 'Correct answer:'}</strong>&nbsp;
+              ${LETTERS[q.correct]}. ${d.opts[q.correct]}
+            </div>`;
+
+          item.innerHTML = `
+            <p class="q-label">${labelText}</p>
+            <p class="q-text">${d.q}</p>
+            ${answersHTML}
+            <div style="margin-top:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.03);border-radius:6px;border-left:2px solid rgba(201,162,39,0.3);">
+              <span style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-dim);">
+                ${lang === 'de' ? 'Erklärung' : lang === 'pt' ? 'Explicação' : 'Explanation'}
+              </span>
+              <p style="font-size:0.9rem;color:var(--text-dim);margin:0.3rem 0 0;font-style:italic;">${d.expl}</p>
+            </div>`;
+
+          list.appendChild(item);
+        });
+      }
+
+      function restartQuiz() {
+        quizState = 'start';
+        currentIdx = 0;
+        userAnswers = new Array(QUESTIONS.length).fill(null);
+        answered = false;
+
+        document.getElementById('screen-results').style.display = 'none';
+        document.getElementById('screen-start').style.display = 'block';
+        document.getElementById('progress-bar').style.width = '0%';
+      }
+
+      // ── Init ──────────────────────────────────────────────────────────────────────
+      document.addEventListener('DOMContentLoaded', () =>
+        setLanguage(localStorage.getItem('lang') || 'de'),
+      );
+    </script>
+  </body>
+</html>
