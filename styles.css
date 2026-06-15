@@ -21,10 +21,16 @@
 }
 
 /* Language visibility: hide all lang variants, show only the active html[lang] */
-.lang-de, .lang-en, .lang-pt { display: none; }
-html[lang="de"] .lang-de,
-html[lang="en"] .lang-en,
-html[lang="pt"] .lang-pt { display: revert; }
+.lang-de,
+.lang-en,
+.lang-pt {
+  display: none;
+}
+html[lang='de'] .lang-de,
+html[lang='en'] .lang-en,
+html[lang='pt'] .lang-pt {
+  display: revert;
+}
 
 * {
   margin: 0;
@@ -44,29 +50,79 @@ body {
   line-height: 1.7;
   min-height: 100vh;
   background-image:
-    radial-gradient(ellipse at 20% 10%, rgba(45, 27, 78, 0.35) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 90%, rgba(10, 13, 26, 0.8) 0%, transparent 50%);
+    radial-gradient(
+      ellipse at 20% 10%,
+      rgba(45, 27, 78, 0.35) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 90%,
+      rgba(10, 13, 26, 0.8) 0%,
+      transparent 50%
+    );
 }
 
 /* ─── STARS BACKGROUND ─── */
 body::before {
   content: '';
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   z-index: 0;
   background-image:
-    radial-gradient(1px 1px at 10% 15%, rgba(201,162,39,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 25% 60%, rgba(201,162,39,0.3) 0%, transparent 100%),
-    radial-gradient(1px 1px at 40% 30%, rgba(255,255,255,0.2) 0%, transparent 100%),
-    radial-gradient(1px 1px at 55% 80%, rgba(201,162,39,0.3) 0%, transparent 100%),
-    radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,0.15) 0%, transparent 100%),
-    radial-gradient(1px 1px at 85% 55%, rgba(201,162,39,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 92% 10%, rgba(255,255,255,0.2) 0%, transparent 100%),
-    radial-gradient(1px 1px at 5% 85%, rgba(201,162,39,0.3) 0%, transparent 100%),
-    radial-gradient(1px 1px at 62% 45%, rgba(255,255,255,0.15) 0%, transparent 100%),
-    radial-gradient(1px 1px at 33% 92%, rgba(201,162,39,0.25) 0%, transparent 100%);
+    radial-gradient(
+      1px 1px at 10% 15%,
+      rgba(201, 162, 39, 0.4) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      1px 1px at 25% 60%,
+      rgba(201, 162, 39, 0.3) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      1px 1px at 40% 30%,
+      rgba(255, 255, 255, 0.2) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      1px 1px at 55% 80%,
+      rgba(201, 162, 39, 0.3) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      1px 1px at 70% 20%,
+      rgba(255, 255, 255, 0.15) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      1px 1px at 85% 55%,
+      rgba(201, 162, 39, 0.4) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      1px 1px at 92% 10%,
+      rgba(255, 255, 255, 0.2) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      1px 1px at 5% 85%,
+      rgba(201, 162, 39, 0.3) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      1px 1px at 62% 45%,
+      rgba(255, 255, 255, 0.15) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      1px 1px at 33% 92%,
+      rgba(201, 162, 39, 0.25) 0%,
+      transparent 100%
+    );
 }
 
 /* ─── HEADER ─── */
@@ -137,10 +193,13 @@ nav a {
   text-transform: uppercase;
   padding: 0.4rem 0.75rem;
   border-radius: 4px;
-  transition: color 0.2s, background 0.2s;
+  transition:
+    color 0.2s,
+    background 0.2s;
 }
 
-nav a:hover, nav a.active {
+nav a:hover,
+nav a.active {
   color: var(--gold);
   background: var(--gold-faint);
 }
@@ -149,7 +208,7 @@ nav a:hover, nav a.active {
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 0.2rem;
@@ -192,8 +251,16 @@ nav a:hover, nav a.active {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(45, 27, 78, 0.4) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(201, 162, 39, 0.06) 0%, transparent 60%);
+    radial-gradient(
+      ellipse 70% 60% at 50% 50%,
+      rgba(45, 27, 78, 0.4) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 40% 30% at 50% 50%,
+      rgba(201, 162, 39, 0.06) 0%,
+      transparent 60%
+    );
   pointer-events: none;
 }
 
@@ -242,11 +309,17 @@ nav a:hover, nav a.active {
   max-width: 400px;
 }
 
-.divider::before, .divider::after {
+.divider::before,
+.divider::after {
   content: '';
   flex: 1;
   height: 1px;
-  background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--gold-dim),
+    transparent
+  );
 }
 
 .divider-symbol {
@@ -303,7 +376,10 @@ main {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 2rem;
-  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s,
+    border-color 0.3s;
 }
 
 .card:hover {
@@ -337,14 +413,18 @@ main {
 .topic-card::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 3px;
   background: linear-gradient(to right, transparent, var(--gold), transparent);
   opacity: 0;
   transition: opacity 0.3s;
 }
 
-.topic-card:hover::before { opacity: 1; }
+.topic-card:hover::before {
+  opacity: 1;
+}
 
 .topic-card:hover {
   transform: translateY(-6px);
@@ -442,7 +522,7 @@ main {
 
 .btn-ghost:hover {
   color: var(--text-main);
-  border-color: rgba(255,255,255,0.3);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* ─── IMAGE GALLERY ─── */
@@ -477,9 +557,11 @@ main {
 
 .gallery-item .caption {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding: 0.5rem 0.75rem;
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
   font-size: 0.75rem;
   color: var(--text-dim);
   font-family: 'Cinzel', serif;
@@ -505,7 +587,9 @@ main {
   margin-top: 2.5rem;
 }
 
-.content-block h2:first-child { margin-top: 0; }
+.content-block h2:first-child {
+  margin-top: 0;
+}
 
 .content-block p {
   margin-bottom: 1.25rem;
@@ -513,7 +597,8 @@ main {
   opacity: 0.92;
 }
 
-.content-block ul, .content-block ol {
+.content-block ul,
+.content-block ol {
   margin: 1rem 0 1.25rem 1.5rem;
 }
 
@@ -602,10 +687,12 @@ main {
   color: var(--text-main);
 }
 
-.officer-table tr:last-child td { border-bottom: none; }
+.officer-table tr:last-child td {
+  border-bottom: none;
+}
 
 .officer-table tr:nth-child(even) td {
-  background: rgba(255,255,255,0.02);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 /* ─── QUIZ ─── */
@@ -615,19 +702,22 @@ main {
   padding: 2rem;
 }
 
-.quiz-start, .quiz-end {
+.quiz-start,
+.quiz-end {
   text-align: center;
   padding: 3rem 2rem;
 }
 
-.quiz-start h2, .quiz-end h2 {
+.quiz-start h2,
+.quiz-end h2 {
   font-family: 'Cinzel Decorative', serif;
   font-size: 2rem;
   color: var(--gold);
   margin-bottom: 1rem;
 }
 
-.quiz-start p, .quiz-end p {
+.quiz-start p,
+.quiz-end p {
   color: var(--text-dim);
   margin-bottom: 2rem;
   font-size: 1rem;
@@ -764,10 +854,26 @@ main {
   transition: all 0.2s;
 }
 
-.option-btn.selected .option-letter { background: var(--gold); color: var(--bg-darkest); border-color: var(--gold); }
-.option-btn.correct .option-letter { background: #27b464; color: white; border-color: #27b464; }
-.option-btn.incorrect .option-letter { background: #dc3c3c; color: white; border-color: #dc3c3c; }
-.option-btn.reveal-correct .option-letter { background: rgba(39, 180, 100, 0.3); color: #5de898; border-color: #27b464; }
+.option-btn.selected .option-letter {
+  background: var(--gold);
+  color: var(--bg-darkest);
+  border-color: var(--gold);
+}
+.option-btn.correct .option-letter {
+  background: #27b464;
+  color: white;
+  border-color: #27b464;
+}
+.option-btn.incorrect .option-letter {
+  background: #dc3c3c;
+  color: white;
+  border-color: #dc3c3c;
+}
+.option-btn.reveal-correct .option-letter {
+  background: rgba(39, 180, 100, 0.3);
+  color: #5de898;
+  border-color: #27b464;
+}
 
 .quiz-nav {
   display: flex;
@@ -801,8 +907,12 @@ main {
   margin-bottom: 0.5rem;
 }
 
-.result-correct .q-label { color: #5de898; }
-.result-incorrect .q-label { color: #f07070; }
+.result-correct .q-label {
+  color: #5de898;
+}
+.result-incorrect .q-label {
+  color: #f07070;
+}
 
 .result-item .q-text {
   font-family: 'Cinzel', serif;
@@ -822,9 +932,18 @@ main {
   gap: 0.5rem;
 }
 
-.result-item .your-answer { background: rgba(220, 60, 60, 0.12); color: #f07070; }
-.result-item .your-answer.was-correct { background: rgba(39, 180, 100, 0.12); color: #5de898; }
-.result-item .correct-answer { background: rgba(39, 180, 100, 0.12); color: #5de898; }
+.result-item .your-answer {
+  background: rgba(220, 60, 60, 0.12);
+  color: #f07070;
+}
+.result-item .your-answer.was-correct {
+  background: rgba(39, 180, 100, 0.12);
+  color: #5de898;
+}
+.result-item .correct-answer {
+  background: rgba(39, 180, 100, 0.12);
+  color: #5de898;
+}
 
 /* ─── FOOTER ─── */
 footer {
@@ -910,7 +1029,11 @@ footer p {
 .quiz-cta {
   text-align: center;
   padding: 4rem 2rem;
-  background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(45, 27, 78, 0.3) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse 60% 80% at 50% 50%,
+    rgba(45, 27, 78, 0.3) 0%,
+    transparent 70%
+  );
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   margin: 2rem 0;
@@ -956,13 +1079,25 @@ footer p {
     padding: 0.35rem 0.5rem;
   }
 
-  .hero { padding: 3rem 1.25rem 2.5rem; }
-  .page-hero { padding: 2.5rem 1.25rem 2rem; }
-  .container { padding: 0 1.25rem; }
-  .section { padding: 2.5rem 0; }
+  .hero {
+    padding: 3rem 1.25rem 2.5rem;
+  }
+  .page-hero {
+    padding: 2.5rem 1.25rem 2rem;
+  }
+  .container {
+    padding: 0 1.25rem;
+  }
+  .section {
+    padding: 2.5rem 0;
+  }
 
-  .quiz-wrapper { padding: 1rem; }
-  .question-card { padding: 1.5rem; }
+  .quiz-wrapper {
+    padding: 1rem;
+  }
+  .question-card {
+    padding: 1.5rem;
+  }
 
   .gallery {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -974,6 +1109,10 @@ footer p {
 }
 
 @media (max-width: 480px) {
-  .logo-text { display: none; }
-  .score-display { font-size: 3rem; }
+  .logo-text {
+    display: none;
+  }
+  .score-display {
+    font-size: 3rem;
+  }
 }
