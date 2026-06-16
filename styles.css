@@ -624,14 +624,53 @@ main {
 
 .symbol-meaning {
   display: grid;
-  grid-template-columns: repeat  display: block;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border-collapse: separate;
-  border-spacing: 0;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
   margin: 1.5rem 0;
-  border-radius: 8px;
+}
+
+.symbol-meaning-item {
+  background: var(--bg-card);
   border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 2rem 1.75rem;
+  text-align: center;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s,
+    border-color 0.3s;
+}
+
+.symbol-meaning-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-gold), var(--shadow);
+  border-color: var(--border-strong);
+}
+
+.symbol-meaning-item .icon {
+  width: 3rem;
+  height: 3rem;
+  line-height: 3rem;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  background: rgba(201, 162, 39, 0.08);
+  color: var(--gold);
+  font-size: 1.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.symbol-meaning-item h4 {
+  margin-bottom: 0.75rem;
+  font-family: 'Cinzel', serif;
+  font-size: 1.15rem;
+  color: var(--gold);
+}
+
+.symbol-meaning-item p {
+  color: var(--text-dim);
+  line-height: 1.6;
 }
 
 .officer-table th,
@@ -981,65 +1020,6 @@ footer p {
 }
 
 .page-hero .subtitle {
-  font-family: 'Cinzel', serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 1rem;
-}
-
-.page-hero .intro {
-  max-width: 680px;
-  margin: 0 auto;
-  color: var(--text-dim);
-  font-size: 1.05rem;
-  font-style: italic;
-}
-
-/* ─── QUIZ ICON BIG ─── */
-.quiz-cta {
-  text-align: center;
-  padding: 4rem 2rem;
-  background: radial-gradient(
-    ellipse 60% 80% at 50% 50%,
-    rgba(45, 27, 78, 0.3) 0%,
-    transparent 70%
-  );
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  margin: 2rem 0;
-}
-
-.quiz-cta .quiz-icon {
-  font-size: 3rem;
-  display: block;
-  margin-bottom: 1rem;
-}
-
-.quiz-cta h2 {
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 1.8rem;
-  color: var(--gold);
-  margin-bottom: 0.75rem;
-}
-
-.quiz-cta p {
-  color: var(--text-dim);
-  margin-bottom: 2rem;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* ─── RESPONSIVE ─── */
-@media (max-width: 768px) {
-  html,
-  body {
-    overflow-x: hidden;
-  }
-
-ero .subtitle {
   font-family: 'Cinzel', serif;
   font-size: 0.8rem;
   letter-spacing: 0.2em;
